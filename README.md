@@ -29,11 +29,11 @@ private:
 подходящего примитива синхронизации был использован mutex.
 
 ## InvertedIndex
-Он описан в том же файле, что и SearchServer. В данной программе реализован вариант инвертированного индекса без позиции
+Он описан в том же файле, что и [SearchServer](search_server.h). В данной программе реализован вариант инвертированного индекса без позиции
 слова в названии документа.
 
 ## Методы класса SearchServer и InvertedIndex
-Реализация методов классов InvertedIndex и SearchServer находится [тут](search_server.cpp).
+Реализация методов классов InvertedIndex и SearchServer находятся [тут](search_server.cpp).
 ```c++
     SearchServer() = default;
     explicit SearchServer(istream &document_input);
