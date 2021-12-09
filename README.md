@@ -23,16 +23,16 @@ private:
 
 Также для задачи были написаны вспомогательные классы:
 
-##Synchronized
+## Synchronized
 Шаблонный класс [Synchronized](synchronized.h), который был 
 создан для упрощения контроля доступа к конкретному элементу (в нашем случае - к построенному индексу). В качестве 
 подходящего примитива синхронизации был использован mutex.
 
-##InvertedIndex
+## InvertedIndex
 Он описан в том же файле, что и SearchServer. В данной программе реализован вариант инвертированного индекса без позиции
 слова в названии документа.
 
-##Методы класса SearchServer и InvertedIndex
+## Методы класса SearchServer и InvertedIndex
 Реализация методов классов InvertedIndex и SearchServer находится [тут](search_server.cpp).
 ```c++
     SearchServer() = default;
