@@ -14,12 +14,12 @@ vector<string> SplitIntoWords(const string& line) {
 InvertedIndex::InvertedIndex(std::istream& document_input)
 {
     index.reserve(15000);
-    docs_count = 0;
+    size_t docs_count = 0;
     std::string line;
     while(std::getline(document_input, line)){
         ++docs_count;
         size_t id = docs_count - 1;
-
+        docs.push_back(line);
         for (std::string& word : SplitIntoWords(line)){
             auto& id_to_count = index[move(word)];
             if (!id_to_count.empty() && id_to_count.back().first == id){
@@ -38,20 +38,12 @@ SearchServer::SearchServer(istream &document_input) {
 }
 
 void SearchServer::UpdateDocumentBase(istream &document_input) {
-
-    auto func = [this, d = ref(document_input)]{
-        UpdateDocumentBaseSingleThread(d);
-    };
-    futures.push_back(async(func));
-    //func();
+    futures.push_back(async(&SearchServer::UpdateDocumentBaseSingleThread, this, ref(document_input)));
 }
 
-void SearchServer::AddQueriesStream(istream &query_input,
-                                    ostream &search_results_output) {
-
-    futures.push_back(async(&SearchServer::AddQueriesStreamSingleThread, this, ref(query_input), ref(search_results_output)));
-
-    //func();
+void SearchServer::AddQueriesStream(istream &query_input, ostream &search_results_output) {
+    futures.push_back(async(&SearchServer::AddQueriesStreamSingleThread, this, ref(query_input),
+                            ref(search_results_output)));
 }
 
 

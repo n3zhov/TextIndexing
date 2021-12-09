@@ -19,13 +19,17 @@ public:
     InvertedIndex() = default;
     const vector<pair<size_t, size_t>> &Lookup(const string &word) const;
 
+    const string& GetDocument(size_t id) const {
+        return docs[id];
+    }
+
     size_t GetSize() const{
-        return docs_count;
+        return docs.size();
     }
 
 private:
     unordered_map<string, vector<pair<size_t, size_t>>> index;
-    size_t docs_count = 0;
+    vector<string> docs;
 };
 
 class SearchServer {
